@@ -40,7 +40,7 @@ service / on new http:Listener(9090) {
 
     isolated resource function get checkNIC(string nic) returns isValid|error? {
 
-        Person|error queryRowResponse = mysqlClient->queryRow(`select * from iddetails where nic=${nic}`);
+        Person|error queryRowResponse = mysqlClient->queryRow(`select * from iddetails where nic=${nic.trim()}`);
 
         if queryRowResponse is error {
             isValid result = { 
